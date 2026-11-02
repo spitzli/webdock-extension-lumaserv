@@ -1,4 +1,47 @@
-# LUMASERV for Webdock
+# LUMASERV
+
+![LUMASERV icon](assets/icon.svg)
+
+Manage approved DNS and server operations through the existing project integration.
+
+## What you can do
+
+Browse DNS zones and records, review changes, inspect server status and use the actions exposed by the connected provider contract.
+
+## Setup and access
+
+Requires a compatible protocol-v1 host, project grant and operator-configured provider binding. Confirm the account, zone and proposed change before submitting writes.
+
+## Data and security
+
+Provider credentials remain in the host binding. Project authority is checked through signed invocations. DNS/server changes can affect availability and require an explicit action.
+
+## Status and limits
+
+Developer alpha. Provider access and supported actions depend on the configured binding; this is separate from the newer read-only LUMASERV Compute plugin. Gallery images use synthetic authoring data and do not demonstrate a live customer deployment.
+
+Catalog publication does not activate the plugin, enable public signup or grant
+access to any customer resource. A new presentation release must use a new version;
+previously signed releases and their assets stay immutable.
+
+## Gallery context
+
+The screenshots below show existing local authoring/test views with fictional
+project data. They do not attest a live provider or customer deployment.
+
+## Catalog source
+
+`.tabularium` is the complete catalog-refresh source. It retains the immutable
+runtime image and full protocol/access contract of the currently released
+`0.1.0-alpha.2` and adds the prepared presentation assets. Refresh it only from a
+reviewed immutable source commit. This does not replace signed release assets
+or activate the runtime.
+
+## Technical reference
+
+The retained implementation notes below include platform integration procedures.
+Commands referring to Core, `tools/` or `apps/console` require the [platform source
+checkout](https://github.com/spitzli/webdock); they are not standalone setup steps.
 
 An independent Webdock extension for the [LUMASERV API](https://docs.control-interface.com/). Manage domains, DNS records, servers, domain contacts, certificates, networking and billing from one project console.
 
@@ -117,8 +160,8 @@ An existing local binary can be selected using `PLAYWRIGHT_EXECUTABLE_PATH`.
 For container validation, build `webdock-lumaserv:0.1.0-alpha.2` locally,
 then run `bun run test:image`. Both tests create only disposable local fixtures.
 
-## EU CI
+## Blacksmith CI
 
-Source pushes and trusted same-repository pull requests run the frozen dependency install, build and unit tests through the dedicated rootless EU builder. External fork PRs cannot run on this persistent trusted runner. No hosted fallback, Docker daemon or provider/customer credentials are used.
+The Blacksmith GitHub App is installed for the exact 16 Spitzli platform, plugin and SDK repositories. The configured and observed region is `us-west`, under the owner’s EU-only exception for Spitzli’s own GitHub CI. The official managed-builder probe passed with `nofallback: true`. These prepared workflows use only Blacksmith; actual per-repository source checks and publication of the regular workflows remain pending. Provider and customer credentials are not used for source checks, and no builder fallback is allowed.
 
-The manual `Plugin EU build` workflow can push a checked image candidate by enabling `publish_image`. It records the immutable image/source identity; existing versioned registry manifests and releases are unchanged. A new registry version still requires its proper manifest and signed integrity verification.
+The prepared manual `Plugin Blacksmith build` workflow can push a checked image candidate by enabling `publish_image`. It records the immutable image/source identity; existing versioned registry manifests and releases are unchanged. A new registry version still requires its proper manifest and signed integrity verification.
